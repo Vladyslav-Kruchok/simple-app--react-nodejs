@@ -1,0 +1,1 @@
+export const selectGetServerData = state => state.data;
