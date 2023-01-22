@@ -1,1 +1,1 @@
-export const selectGetServerData = state => state.data;
+export const selectGetServerData = state => state.serverData.stateSliceData;

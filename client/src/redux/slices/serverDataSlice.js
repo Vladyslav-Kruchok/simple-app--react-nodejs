@@ -1,21 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = "initialState";
 //slice
 export const serverDataSlice = createSlice({
     name: "serverData",
+    //start state of reducer and variable = stateData
     initialState: {
-        data: ""
+        stateSliceData: initialState
     },
+    //Object of reducers
     reducers: {
-        getRoot: (state, { payload }) => {
-            state.data = payload;
+        setData: (state, { payload }) => {
+            state.stateSliceData = payload;
         }
     }
 });
 
-//actions: serverData/getData
-export const { getRoot } = serverDataSlice.actions;
+//actions: serverData/setData
+export const { setData } = serverDataSlice.actions;
 
-//reducers
-export default serverDataSlice.reducer;
+//reducers of slice
+export const serverDataReducer =  serverDataSlice.reducer;
 

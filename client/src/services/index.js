@@ -1,2 +1,2 @@
-export { baseApi } from "./baseApi";
-export { useGetRoot } from "./serverApi";
+export { rtkBaseApi } from "./rtkBaseApi";
+export { rtkServerApi, useGetServerDataQuery } from "./rtkServerApi";
