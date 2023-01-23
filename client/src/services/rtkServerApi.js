@@ -4,7 +4,7 @@ import { rtkBaseApi } from "./rtkBaseApi";
 // Define endpoints
 export const rtkServerApi = rtkBaseApi.injectEndpoints({
     endpoints: (builder) => ({
-        getServerData: builder.query({
+        getData: builder.query({
             query: () => ({
                 url: "api",
             }),
@@ -13,5 +13,5 @@ export const rtkServerApi = rtkBaseApi.injectEndpoints({
 });
 
 export const {
-    useGetServerDataQuery
+    useGetDataQuery
 } = rtkServerApi;

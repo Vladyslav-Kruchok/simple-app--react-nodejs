@@ -10,6 +10,7 @@ import { Routes, Route } from 'react-router-dom';
 //Dynamic
 const LayoutView = lazy(() => import("./views/LayoutView/LayoutView.jsx" /* webpackChunkName: "LayoutView" */));
 const ServerDataView = lazy(() => import("./views/ServerDataView/ServerDataView.jsx" /* webpackChunkName: "ServerDataView" */));
+const NotFoundView = lazy(() => import('./views/NotFoundView/NotFoundView.jsx' /* webpackChunkName: "NotFound" */));
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LayoutView />}>
           <Route path="/api" element={<ServerDataView />} />
+          <Route path="*" element={<NotFoundView /> } />
         </Route>
       </Routes>
     </Suspense>

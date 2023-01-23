@@ -1,13 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { serverDataReducer } from "./slices/serverDataSlice";
+import { sliceServer } from "./slices";
 
 import { rtkBaseApi } from "../services/rtkBaseApi";
 
 
 export const store = configureStore({
     reducer: {
-        serverData: serverDataReducer,
+        //Store - Slice
+        serverData: sliceServer.dataReducer,
         //Store - RTK Query
         [rtkBaseApi.reducerPath]: rtkBaseApi.reducer
     },

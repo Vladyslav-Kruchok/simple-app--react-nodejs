@@ -1,1 +1,1 @@
-export * as serverDataOperation from './serverDataOperation';
+export * as operationServer from './operationServer';

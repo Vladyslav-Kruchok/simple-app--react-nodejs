@@ -1,49 +1,60 @@
-// React
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import { useDispatch, useSelector } from 'react-redux';
+//#region React-IMPORT #
+    // useEffect for SLICE
+    import React, { useEffect } from "react"; 
+//#endregion #
 
-// API - RTK Query
-import { useGetServerDataQuery } from "../../services";
+//#region API - 1) RTK Query-IMPORT #
+    import { rtkServerApi } from "../../services";
+//#endregion #
 
-// reducers
-import { setData } from "../../redux/slices/serverDataSlice";
+//#region 2) SLICE-IMPORT #
+    // useDispatch run operations, useSelector read value from the state by selector
+    import { useDispatch, useSelector } from 'react-redux';
+    // Slice
+    import { sliceServer } from "../../redux/slices";
+    // Selectors
+    import { selectServer } from "../../redux/selectors";
+    // Operation
+    import { operationServer } from "../../redux/operations";
+//#endregion #
 
-// Selectors
-import { selectGetServerData } from "../../redux/selectors/selectServerData"
-
-// Operation
-import { serverDataOperation } from "../../redux/operations";
-
+//Two variants: 1) RTK Query 2) SLICE
 const ServerData = () => {
-    // Response - RTK Query
-    const { data } = useGetServerDataQuery();
-    
-    // Store selector: read value from the state => state.serverData.stateSliceData
-    const stateServerDataSelector = useSelector(selectGetServerData);
+    //#region 1) RTK Query, use internal state
 
-    // Response - sliceServerApi 
-    const dispatch = useDispatch();
-    useEffect(() => {
-        const dataPromise = dispatch(serverDataOperation.operationGetServerData());
-        dataPromise
-            .then(({payload}) => {
-                dispatch(setData(payload ? payload.message : "HARDCORE"));
-            });
-    }, [dispatch]);
+        // Response - rtkServerApi
+        const { data } = rtkServerApi.useGetDataQuery();
+
+    //#endregion #
+
+    //#region 2) SLICE #
+    
+        // Store selector: read value from the state => state.serverData.stateSliceData
+        const stateServerData = useSelector(selectServer.getData);
+
+        // Response - sliceServerApi 
+        const dispatch = useDispatch();
+        // Run to do when dispatch changes
+        useEffect(() => {
+            // When dispatch run operationServer.getData() as a result Return promise
+            const dataPromise = dispatch(operationServer.getData());
+            dataPromise
+                .then(({payload}) => {
+                    dispatch(sliceServer.setData(payload ? payload.message : "HARDCORE"));
+                });
+        }, [dispatch]);
+    
+    //#endregion #
 
     return (
         <>
+            {/* RTK Query */}
             <p>{!data ? "Loading RTK..." : data.message}</p>
-            <p>{!stateServerDataSelector ? "Loading SLICE..." : stateServerDataSelector}</p>
+
+            {/* SLICE */}
+            <p>{!stateServerData ? "Loading SLICE..." : stateServerData}</p>
         </>
     );
-};
-
-ServerData.protoType = {
-    data: PropTypes.shape({
-        message: PropTypes.string
-    }).isRequired
 };
 
 export default ServerData;

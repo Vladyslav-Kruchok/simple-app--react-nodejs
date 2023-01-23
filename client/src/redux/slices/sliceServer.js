@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = "initialState";
+const initialState = "";
 //slice
-export const serverDataSlice = createSlice({
+export const sliceServer = createSlice({
     name: "serverData",
-    //start state of reducer and variable = stateData
+    //start state of reducer
     initialState: {
         stateSliceData: initialState
     },
@@ -17,8 +17,8 @@ export const serverDataSlice = createSlice({
 });
 
 //actions: serverData/setData
-export const { setData } = serverDataSlice.actions;
+export const { setData } = sliceServer.actions;
 
 //reducers of slice
-export const serverDataReducer =  serverDataSlice.reducer;
+export const dataReducer =  sliceServer.reducer;
 

@@ -1,2 +1,2 @@
-export { rtkBaseApi } from "./rtkBaseApi";
-export { rtkServerApi, useGetServerDataQuery } from "./rtkServerApi";
+export * as rtkServerApi from "./rtkServerApi";
+export * as sliceServerApi from "./sliceServerApi";
